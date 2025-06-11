@@ -15,9 +15,9 @@ export const useLoginUserStore = defineStore('loginUser', () => {
     }
 
     // 测试用户登录, 3 秒登录
-    setTimeout(() => {
-      loginUser.value = { userName: '测试用户', id: 1 }
-    }, 3000)
+    // setTimeout(() => {
+    //   loginUser.value = { userName: '测试用户', id: 1 }
+    // }, 3000)
   }
 
   function setLoginUser(newLoginUser: any) {
