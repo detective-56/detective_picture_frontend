@@ -5,6 +5,7 @@ import UserManagePage from '@/pages/admin/UserManagePage.vue'
 import ACCESS_ENUM from '@/access/accessEnum'
 import HelloWorld from '@/components/HelloWorld.vue'
 import HomePage from '@/pages/HomePage.vue'
+import AddPicturePage from '@/components/AddPicturePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +49,11 @@ const router = createRouter({
       meta: {
         hideInMenu: false,
       },
+    },
+    {
+      path: '/add_picture',
+      name: '创建图片',
+      component: AddPicturePage
     },
   ],
 })
