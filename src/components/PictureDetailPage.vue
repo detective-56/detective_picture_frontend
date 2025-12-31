@@ -47,28 +47,28 @@
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
+      <a-space wrap>
+        <a-button v-if="canEdit" type="default" @click="doEdit">
+          编辑
+          <template #icon>
+            <EditOutlined />
+          </template>
+        </a-button>
+        <a-button v-if="canEdit" danger @click="doDelete">
+          删除
+          <template #icon>
+            <DeleteOutlined />
+          </template>
+        </a-button>
+        <a-button type="primary" @click="doDownload">
+          免费下载
+          <template #icon>
+            <DownloadOutlined />
+          </template>
+        </a-button>
+      </a-space>
     </a-col>
   </a-row>
-  <a-space wrap>
-    <a-button v-if="canEdit" type="default" @click="doEdit">
-      编辑
-      <template #icon>
-        <EditOutlined />
-      </template>
-    </a-button>
-    <a-button v-if="canEdit" danger @click="doDelete">
-      删除
-      <template #icon>
-        <DeleteOutlined />
-      </template>
-    </a-button>
-    <a-button type="primary" @click="doDownload">
-      免费下载
-      <template #icon>
-        <DownloadOutlined />
-      </template>
-    </a-button>
-  </a-space>
 </template>
 
 <script lang="ts" setup>
@@ -83,13 +83,13 @@ const props = defineProps<{
   id: string | number
 }>()
 
-const picture = ref<API.PictureVO>({})
+const picture = ref<API.PictureVo>({})
 
 // 获取图片详情
 const fetchPictureDetail = async () => {
   try {
     const res = await getPictureVoByIdUsingGet({
-      id: props.id,
+      id: Number(props.id),
     })
     if (res.data.code === 0 && res.data.data) {
       picture.value = res.data.data

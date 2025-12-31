@@ -95,7 +95,7 @@ const pagination = computed(() => {
     pageSize: searchParams.pageSize ?? 10,
     total: total.value,
     // 切换页号时，会修改搜索参数并获取数据
-    onChange: (page, pageSize) => {
+    onChange: (page: any, pageSize: any) => {
       searchParams.current = page
       searchParams.pageSize = pageSize
       fetchData()
