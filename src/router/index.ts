@@ -6,6 +6,8 @@ import ACCESS_ENUM from '@/access/accessEnum'
 import HelloWorld from '@/components/HelloWorld.vue'
 import HomePage from '@/pages/HomePage.vue'
 import AddPicturePage from '@/components/AddPicturePage.vue'
+import PictureMangagePage from '@/pages/admin/PictureMangagePage.vue'
+import PictureDetailPage from '@/components/PictureDetailPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,7 +55,18 @@ const router = createRouter({
     {
       path: '/add_picture',
       name: '创建图片',
-      component: AddPicturePage
+      component: AddPicturePage,
+    },
+    {
+      path: '/admin/pictureManage',
+      name: '图片管理',
+      component: PictureMangagePage,
+    },
+    {
+      path: '/picture/:id',
+      name: '图片详情',
+      component: PictureDetailPage,
+      props: true,
     },
   ],
 })

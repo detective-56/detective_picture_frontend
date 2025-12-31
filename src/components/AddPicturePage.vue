@@ -4,7 +4,7 @@
       {{ route.query?.id ? '修改图片' : '创建图片' }}
     </h2>
     <PictureUpload :picture="picture" :onSuccess="onSuccess" />
-    <a-form layout="vertical" :model="pictureForm" @finish="handleSubmit">
+    <a-form v-if="picture" layout="vertical" :model="pictureForm" @finish="handleSubmit">
       <a-form-item label="名称" name="name">
         <a-input v-model:value="pictureForm.name" placeholder="请输入名称" />
       </a-form-item>

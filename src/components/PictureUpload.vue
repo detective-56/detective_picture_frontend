@@ -1,5 +1,6 @@
 <template>
-  <a-upload
+  <div class="picture-upload">
+    <a-upload
     list-type="picture-card"
     class="avatar-uploader"
     :show-upload-list="false"
@@ -13,6 +14,7 @@
       <div class="ant-upload-text">点击或拖拽上传图片</div>
     </div>
   </a-upload>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
@@ -73,29 +75,15 @@ const props = defineProps<Props>()
 <style scoped>
 
 .picture-upload :deep(.ant-upload) {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   min-height: 152px;
   min-width: 152px;
 }
+
 .picture-upload img {
   max-width: 100%;
-  max-height: 400px;
-}
-
-.ant-upload-select-picture-card {
-  font-size: 32px;
-  color: #999;
-}
-
-.ant-upload-select-picture-card .ant-upload-text {
-  margin-top: 32px;
-  color: #999;
-}
-
-.avatar-uploader > .ant-upload {
-  width: 128px;
-  height: 128px;
+  max-height: 480px;
 }
 
 .ant-upload-select-picture-card i {
@@ -107,4 +95,5 @@ const props = defineProps<Props>()
   margin-top: 8px;
   color: #666;
 }
+
 </style>

@@ -78,7 +78,7 @@ export async function listPictureByPageUsingPost(
 }
 
 /** listPictureByPageVo POST /api/picture/list/page/vo */
-export async function listPictureByPageVoUsingPost(
+export async function listPictureVoByPageUsingPost(
   body: API.PictureQueryRequest,
   options?: { [key: string]: any }
 ) {
