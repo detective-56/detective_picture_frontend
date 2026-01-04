@@ -1,31 +1,27 @@
 <template>
   <a-flex justify="space-between">
     <h2>图片管理</h2>
-    <a-button type="primary" href="/add_picture" target="_blank">+ 创建图片</a-button>
+    <a-button href="/add_picture" target="_blank" type="primary">+ 创建图片</a-button>
   </a-flex>
 
-  <a-form layout="inline" :model="searchParams" @finish="doSearch">
+  <a-form :model="searchParams" layout="inline" @finish="doSearch">
     <a-form-item label="关键词" name="searchText">
-      <a-input
-        v-model:value="searchParams.searchText"
-        placeholder="从名称和简介搜索"
-        allow-clear
-      />
+      <a-input v-model:value="searchParams.searchText" allow-clear placeholder="从名称和简介搜索" />
     </a-form-item>
     <a-form-item label="类型" name="category">
-      <a-input v-model:value="searchParams.category" placeholder="请输入类型" allow-clear />
+      <a-input v-model:value="searchParams.category" allow-clear placeholder="请输入类型" />
     </a-form-item>
     <a-form-item label="标签" name="tags">
       <a-select
         v-model:value="searchParams.tags"
+        allow-clear
         mode="tags"
         placeholder="请输入标签"
         style="min-width: 180px"
-        allow-clear
       />
     </a-form-item>
     <a-form-item>
-      <a-button type="primary" html-type="submit">搜索</a-button>
+      <a-button html-type="submit" type="primary">搜索</a-button>
     </a-form-item>
   </a-form>
 
@@ -33,8 +29,8 @@
     :columns="columns"
     :data-source="dataList"
     :pagination="pagination"
+    :scroll="{ x: 'max-content' }"
     @change="doTableChange"
-    :scroll="{ x: 'max-content'}"
   >
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'url'">
@@ -43,7 +39,7 @@
       <!-- 标签 -->
       <template v-if="column.dataIndex === 'tags'">
         <a-space wrap>
-          <a-tag v-for="tag in JSON.parse(record.tags || '[]')" :key="tag">{{ tag }}</a-tag>
+          <a-tag v-for="tag in record.tags" :key="tag">{{ tag }}</a-tag>
         </a-space>
       </template>
       <!-- 图片信息 -->
@@ -62,8 +58,10 @@
       </template>
       <template v-else-if="column.key === 'action'">
         <a-space>
-          <a-button type="link" :href="`/add_picture?id=${record.id}`" target="_blank">编辑</a-button>
-          <a-button type="link" danger @click="doDelete(record.id)">删除</a-button>
+          <a-button :href="`/add_picture?id=${record.id}`" target="_blank" type="link"
+            >编辑
+          </a-button>
+          <a-button danger type="link" @click="doDelete(record.id)">删除</a-button>
         </a-space>
       </template>
     </template>
@@ -72,7 +70,6 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, reactive, ref } from 'vue'
-import { deleteUserUsingPost, listUserVoByPageUsingPost } from '@/service/api/userController'
 import { message } from 'ant-design-vue'
 import dayjs from 'dayjs'
 import { deletePictureUsingPost, listPictureByPageUsingPost } from '@/service/api/pictureController'
@@ -126,7 +123,6 @@ const columns = [
     key: 'action',
   },
 ]
-
 
 // 数据
 const dataList = ref([])

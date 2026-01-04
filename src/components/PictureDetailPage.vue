@@ -3,7 +3,9 @@
     <!-- 图片展示区 -->
     <a-col :md="16" :sm="24" :xl="18">
       <a-card title="图片预览">
-        <a-image :src="picture.url" style="max-height: 600px; object-fit: contain" />
+        <div class="image-container">
+          <a-image :src="picture.url" style="max-height: 600px; object-fit: contain" />
+        </div>
       </a-card>
     </a-col>
     <!-- 图片信息区 -->
@@ -142,4 +144,12 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+/* 或者直接设置 a-image 的样式 */
+.image-container :deep(.ant-image) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+</style>
