@@ -77,12 +77,27 @@ export async function listPictureByPageUsingPost(
   })
 }
 
-/** listPictureByPageVo POST /api/picture/list/page/vo */
+/** listPictureVoByPage POST /api/picture/list/page/vo */
 export async function listPictureVoByPageUsingPost(
   body: API.PictureQueryRequest,
   options?: { [key: string]: any }
 ) {
   return request<API.BaseResponsePagePictureVo_>('/api/picture/list/page/vo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  })
+}
+
+/** doPictureReview POST /api/picture/review */
+export async function doPictureReviewUsingPost(
+  body: API.PictureReviewRequest,
+  options?: { [key: string]: any }
+) {
+  return request<API.BaseResponseBoolean_>('/api/picture/review', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -137,7 +152,7 @@ export async function uploadUsingPost(
         if (item instanceof Array) {
           item.forEach((f) => formData.append(ele, f || ''))
         } else {
-          formData.append(ele, JSON.stringify(item))
+          formData.append(ele, new Blob([JSON.stringify(item)], { type: 'application/json' }))
         }
       } else {
         formData.append(ele, item)
